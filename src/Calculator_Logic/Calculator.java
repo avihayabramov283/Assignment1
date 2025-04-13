@@ -1,3 +1,5 @@
+package Calculator_Logic;
+
 import poly.Polynomial;
 import scalar.IntegerScalar;
 import scalar.RationalScalar;
