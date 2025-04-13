@@ -1,9 +1,9 @@
-package Calculator_Logic;
+package app;
+import Calculator_Logic.poly.Polynomial;
+import Calculator_Logic.scalar.IntegerScalar;
+import Calculator_Logic.scalar.RationalScalar;
+import Calculator_Logic.scalar.Scalar;
 
-import poly.Polynomial;
-import scalar.IntegerScalar;
-import scalar.RationalScalar;
-import scalar.Scalar;
 
 import java.util.Scanner;
 
