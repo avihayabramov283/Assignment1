@@ -11,6 +11,7 @@ public class IntegerScalar implements Scalar {
 
     //getters and setters
 
+
     //methods
 
     public Scalar add(Scalar other) {
@@ -22,20 +23,33 @@ public class IntegerScalar implements Scalar {
     }
 
     public Scalar neg(){
-        return null;
+        return new IntegerScalar(-this.number);
     }
 
     public Scalar power(int exponent) {
-        return null;
+        return new IntegerScalar(this.number * exponent);
     }
 
     public int sign(){
-        return 0;
+        int result;
+        if (this.number == 0) result = 0;
+        else if (this.number > 0) result = 1;
+        else result = -1;
+        return result;
     }
 
     @Override
     public boolean equals(Object other){
-        return false;
+        boolean result = false;
+        if(other instanceof IntegerScalar){
+            result = this.number == ((IntegerScalar)other).number;
+        }
+        return result;
+    }
+
+    @Override
+    public String toString(){
+        return "" + this.number;
     }
 
 }
