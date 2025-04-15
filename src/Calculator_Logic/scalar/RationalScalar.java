@@ -13,15 +13,30 @@ public class RationalScalar implements Scalar {
 
     //getters and setters
 
+
     //methods
 
     public Scalar add(Scalar other) {
+        return other.addRational(this);
+    }
+
+    @Override
+    public Scalar addInteger(IntegerScalar other) {
+        return new RationalScalar(
+                this.numerator + other.getNum() * this.denominator,
+                this.denominator
+        ).reduce();
+    }
+
+    @Override
+    public Scalar addRational(RationalScalar other) {
         return null;
     }
 
     public Scalar mul(Scalar other) {
         return null;
     }
+
 
     public Scalar neg(){
         return null;

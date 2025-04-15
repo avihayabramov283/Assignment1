@@ -15,7 +15,16 @@ public class IntegerScalar implements Scalar {
     //methods
 
     public Scalar add(Scalar other) {
-        return null;
+        return other.addInteger(this);
+    }
+
+    public Scalar addInteger(IntegerScalar other) {
+        return new IntegerScalar(this.number + other.number);
+    }
+
+    @Override
+    public Scalar addRational(RationalScalar other) {
+        return new RationalScalar(this.number, 1).addRational(other);
     }
 
     public Scalar mul(Scalar other) {
