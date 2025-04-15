@@ -12,7 +12,7 @@ public class Monomial {
     private Scalar coefficient;
 
     //constructors
-    Monomial(int exponent, Scalar coefficient) {
+    public Monomial(int exponent, Scalar coefficient) {
         this.exponent = exponent;
         this.coefficient = coefficient;
     }
