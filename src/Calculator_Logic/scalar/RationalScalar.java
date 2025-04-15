@@ -1,4 +1,6 @@
 package Calculator_Logic.scalar;
+import java.lang.Math;
+
 
 public class RationalScalar implements Scalar {
     //fields
@@ -13,6 +15,14 @@ public class RationalScalar implements Scalar {
 
     //getters and setters
 
+    public int getNumerator() {
+        return numerator;
+    }
+
+    public int getDenominator() {
+        return denominator;
+    }
+
 
     //methods
 
@@ -24,30 +34,47 @@ public class RationalScalar implements Scalar {
     public Scalar addInteger(IntegerScalar other) {
         return new RationalScalar(
                 this.numerator + other.getNum() * this.denominator,
-                this.denominator
-        ).reduce();
+                this.denominator).reduce();
     }
 
     @Override
     public Scalar addRational(RationalScalar other) {
-        return null;
+        int newNumerator = this.denominator * other.numerator + other.denominator * this.numerator;
+        int newDenominator = this.denominator * other.denominator;
+        return new RationalScalar(newNumerator, newDenominator).reduce();
     }
 
     public Scalar mul(Scalar other) {
-        return null;
+        return other.mulRational(this);
     }
 
+    @Override
+    public Scalar mulInteger(IntegerScalar other) {
+        return new RationalScalar(this.numerator * other.getNum(), this.denominator).reduce();
+    }
+
+    @Override
+    public Scalar mulRational(RationalScalar other) {
+        return new RationalScalar(this.numerator * other.numerator, this.denominator * other.denominator).reduce();
+    }
 
     public Scalar neg(){
-        return null;
+        return new RationalScalar(-this.numerator, this.denominator);
     }
 
     public Scalar power(int exponent) {
-        return null;
+        int newNum = (int)Math.pow(this.numerator, exponent);
+        int newDen = (int)Math.pow(this.denominator, exponent);
+        return new RationalScalar(newNum, newDen).reduce();
     }
 
     public int sign(){
-        return 0;
+        int result;
+        if(this.numerator > 0 && this.denominator > 0){ result = 1; }
+        else if((this.numerator < 0 && this.denominator > 0) ||
+                (this.numerator > 0 && this.denominator < 0) ){ result = -1; }
+        else { result = 0; }
+        return result;
     }
 
     public RationalScalar reduce(){
@@ -56,12 +83,17 @@ public class RationalScalar implements Scalar {
 
     @Override
     public boolean equals(Object other){
-        return false;
+        boolean result = false;
+        if(other instanceof RationalScalar){
+            if(this.numerator == ((RationalScalar)other).numerator &&
+            this.denominator == ((RationalScalar)other).denominator) {result = true; }
+        }
+        return result;
     }
 
     @Override
     public String toString(){
-        return "RationalScalar";
+        return this.numerator + "/" + this.denominator;
     }
 
 }

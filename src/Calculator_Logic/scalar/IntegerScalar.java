@@ -11,6 +11,10 @@ public class IntegerScalar implements Scalar {
 
     //getters and setters
 
+    public int getNum() {
+        return number;
+    }
+
 
     //methods
 
@@ -28,7 +32,17 @@ public class IntegerScalar implements Scalar {
     }
 
     public Scalar mul(Scalar other) {
-        return null;
+        return other.mulInteger(this);
+    }
+
+    @Override
+    public Scalar mulInteger(IntegerScalar other) {
+        return new IntegerScalar(this.number * other.number);
+    }
+
+    @Override
+    public Scalar mulRational(RationalScalar other) {
+        return new RationalScalar(this.number * other.getNumerator(), other.getDenominator()).reduce();
     }
 
     public Scalar neg(){
