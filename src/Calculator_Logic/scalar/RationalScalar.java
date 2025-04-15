@@ -78,7 +78,23 @@ public class RationalScalar implements Scalar {
     }
 
     public RationalScalar reduce(){
-        return null;
+        if (numerator == 0) {
+            return new RationalScalar(0, 1); 
+        }
+
+        int gcd = Math.abs(gcd(numerator, denominator));
+        int reducedNumerator = numerator / gcd;
+        int reducedDenominator = denominator / gcd;
+
+        if (reducedDenominator < 0) {
+            reducedNumerator = -reducedNumerator;
+            reducedDenominator = -reducedDenominator;
+        }
+        return new RationalScalar(reducedNumerator, reducedDenominator); 
+    }
+
+    private int gcd(int numerator, int denominator) {
+        return numerator;
     }
 
     @Override
