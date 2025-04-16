@@ -9,6 +9,9 @@ public class RationalScalar implements Scalar {
 
     //constructors
     public RationalScalar(int numerator, int denominator) {
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Denominator cannot be zero.");
+        }
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -77,9 +80,13 @@ public class RationalScalar implements Scalar {
         return result;
     }
 
-    public RationalScalar reduce(){
+    public RationalScalar reduce() {
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Cannot reduce with denominator = 0");
+        }
+
         if (numerator == 0) {
-            return new RationalScalar(0, 1); 
+            return new RationalScalar(0, 1);
         }
 
         int gcd = Math.abs(gcd(numerator, denominator));
@@ -90,22 +97,27 @@ public class RationalScalar implements Scalar {
             reducedNumerator = -reducedNumerator;
             reducedDenominator = -reducedDenominator;
         }
-        return new RationalScalar(reducedNumerator, reducedDenominator); 
+
+        return new RationalScalar(reducedNumerator, reducedDenominator);
     }
 
-    private int gcd(int numerator, int denominator) {
-        return numerator;
+
+    private int gcd(int a, int b) {
+        if (b == 0) return Math.abs(a);
+        return gcd(b, a % b);
     }
+
 
     @Override
-    public boolean equals(Object other){
-        boolean result = false;
-        if(other instanceof RationalScalar){
-            if(this.numerator == ((RationalScalar)other).numerator &&
-            this.denominator == ((RationalScalar)other).denominator) {result = true; }
-        }
-        return result;
+    public boolean equals(Object other) {
+        if (!(other instanceof RationalScalar)) return false;
+
+        RationalScalar r1 = this.reduce();
+        RationalScalar r2 = ((RationalScalar) other).reduce();
+
+        return r1.numerator == r2.numerator && r1.denominator == r2.denominator;
     }
+
 
     @Override
     public String toString(){
