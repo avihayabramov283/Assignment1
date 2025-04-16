@@ -26,36 +26,28 @@ public class Monomial {
         return this.coefficient;
     }
 
+    public void setCoefficient(Scalar s) {
+        this.coefficient = s;
+    }
+
     //methods
     public Monomial add(Monomial monomial) {
-
-        int otherExponent = monomial.getExponent();
-        Scalar otherCoefficient = monomial.getCoefficient();
-
-        if(otherExponent != this.exponent)
+        if(this.exponent != monomial.getExponent())
             return null;
-        Monomial newMonomial = new Monomial(otherExponent, this.coefficient.add(otherCoefficient));
+        Scalar s = this.coefficient.add(monomial.getCoefficient());
+        Monomial newMonomial = new Monomial(this.exponent, s);
         return newMonomial;
     }
 
     public Monomial mul(Monomial monomial) {
-
-        int otherExponent = monomial.getExponent();
-        Scalar otherCoefficient = monomial.getCoefficient();
-
-        Monomial newMonomial = new Monomial(otherExponent + this.getExponent(), this.coefficient.mul(otherCoefficient));
-        return newMonomial;
+        Scalar s = this.coefficient.mul(monomial.getCoefficient());
+        int e = this.exponent + monomial.getExponent();
+        return new Monomial(e, s);
     }
 
     public Scalar evaluate(Scalar scalar) {
-
-        int functionExp = this.exponent;
-        Scalar functionCoef = this.coefficient;
-
-        scalar = scalar.power(functionExp);
-        scalar = scalar.mul(functionCoef);
-
-        return scalar;
+        Scalar powerResult = scalar.power(this.exponent);
+        return this.coefficient.mul(powerResult);
     }
 
     public Monomial derivative() {

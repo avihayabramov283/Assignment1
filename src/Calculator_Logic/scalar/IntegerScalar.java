@@ -50,7 +50,7 @@ public class IntegerScalar implements Scalar {
     }
 
     public Scalar power(int exponent) {
-        return new IntegerScalar(this.number * exponent);
+        return new IntegerScalar((int) Math.pow(this.number, exponent));
     }
 
     public int sign(){

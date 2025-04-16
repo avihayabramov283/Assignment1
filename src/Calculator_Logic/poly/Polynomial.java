@@ -28,7 +28,7 @@ public class Polynomial {
             }
 
             Monomial mono = new Monomial(i, scalar);
-            p.monomials.put(i, mono);
+            p.addMonomial(mono);
         }
         return p;
     }
