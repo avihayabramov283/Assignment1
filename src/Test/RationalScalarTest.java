@@ -1,5 +1,8 @@
-package Calculator_Logic.scalar;
+package Test;
 
+import Calculator_Logic.scalar.IntegerScalar;
+import Calculator_Logic.scalar.RationalScalar;
+import Calculator_Logic.scalar.Scalar;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
